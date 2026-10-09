@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chetan GameVerse | Free Online Games</title>
+  <meta name="description" content="Experience a futuristic 3D cyberpunk arcade portal in your browser. Play Snake Challenge, Cyber Tic-Tac-Toe, Neon Memory Match, and Hyper Dash 2D with instant retro Web Audio and saved high scores! — Chetan GameVerse">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/games.css">
+</head>
+<body>
+
+  <!-- Ambient Cyber Lighting & Dynamic Canvas -->
+  <div class="ambient-grid"></div>
+  <div class="ambient-radial-glow glow-cyan"></div>
+  <div class="ambient-radial-glow glow-purple"></div>
+  <div class="ambient-radial-glow glow-violet"></div>
+  <canvas id="cyber-bg-canvas"></canvas>
+
+  <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="#home" class="logo-brand">
+        <span class="logo-icon">🕹️</span>
+        <span class="logo-text">CHETAN<span class="cyan">GAME</span><span class="purple">VERSE</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#featured">Featured</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#leaderboard">Leaderboard</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Sound FX Toggle Button -->
+        <button id="audio-toggle-btn" class="audio-toggle" title="Toggle Sound Effects" aria-label="Toggle Sound Effects">
+          <span class="icon">🔊</span>
+          <span class="btn-text">Sound ON</span>
+        </button>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="nav-toggle-btn" class="nav-toggle-btn" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Drawer Backdrop Overlay -->
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="home">
+    <div class="hero-ambient-beams"></div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-pulse"></span>
+          <span>NEXT-GEN RETRO ARCADE • LIVE PORTAL</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="title-row text-gradient-cyan">WELCOME TO</span>
+          <span class="title-row text-gradient-purple">CHETAN GAMEVERSE</span>
+        </h1>
+
+        <p class="hero-desc">
+          Play More. Explore More. Game On! Step into an electrifying neon-charged cyber dimension. Play instant 3D-styled arcade classics directly in your browser with zero downloads, lightning-fast controls, synthesized retro audio, and persistent local high scores.
+        </p>
+
+        <div class="hero-cta-group">
+          <!-- Glowing Play Now Button -->
+          <a href="#featured" class="btn-neon-primary btn-hero-play" id="hero-play-btn">
+            <span class="btn-glow-aura"></span>
+            <span class="btn-shimmer-sweep"></span>
+            <span class="btn-content">⚡ PLAY NOW</span>
+          </a>
+          <a href="#leaderboard" class="btn-neon-secondary">
+            <span>🏆 LEADERBOARD</span>
+          </a>
+          <a href="#games" class="btn-neon-ghost">
+            <span>🎮 ALL GAMES</span>
+          </a>
+        </div>
+
+        <!-- Live Arcade Stats -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num cyan">4</span>
+            <span class="stat-lbl">Active Games</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num purple">0</span>
+            <span class="stat-lbl">Installs Required</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num gold">100%</span>
+            <span class="stat-lbl">Free To Play</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num green">0ms</span>
+            <span class="stat-lbl">Client Latency</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Hologram Cabinet Visual -->
+      <div class="hero-visual">
+        <div class="hologram-cabinet-wrap">
+          <div class="hologram-cabinet" id="hero-cabinet">
+            <div class="cabinet-marquee">
+              <span class="marquee-text">CHETAN<span class="cyan">GAME</span><span class="purple">VERSE</span></span>
+            </div>
+            <div class="hologram-screen">
+              <div class="screen-scanlines"></div>
+              <div class="screen-glow-vignette"></div>
+              <div class="screen-content-rotator" id="cabinet-rotator">
+                <div class="screen-arcade-icon">👾</div>
+                <div class="screen-text">READY PLAYER ONE</div>
+                <div class="screen-subtext">SELECT A GAME TO LAUNCH</div>
+                <div class="screen-chips">
+                  <span class="chip-item">SNAKE</span>
+                  <span class="chip-item">RACER</span>
+                  <span class="chip-item">TICTACTOE</span>
+                  <span class="chip-item">MEMORY</span>
+                </div>
+              </div>
+            </div>
+            <div class="hologram-controls">
+              <div class="control-dpad">✚</div>
+              <div class="control-stick-wrap">
+                <div class="control-stick"></div>
+              </div>
+              <div class="control-buttons">
+                <button class="c-btn cyan" title="Launch Snake Challenge" data-open-game="snake" aria-label="Launch Snake"></button>
+                <button class="c-btn pink" title="Launch Hyper Dash Racer" data-open-game="racer" aria-label="Launch Racer"></button>
+                <button class="c-btn gold" title="Launch Cyber Tic-Tac-Toe" data-open-game="tictactoe" aria-label="Launch Tic-Tac-Toe"></button>
+                <button class="c-btn purple" title="Launch Neon Memory Match" data-open-game="memory" aria-label="Launch Memory"></button>
+              </div>
+            </div>
+          </div>
+          <div class="cabinet-pedestal-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FEATURED GAMES SECTION
+       ========================================================================== -->
+  <section class="section section-featured" id="featured">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Spotlight Arena</span>
+        <h2 class="section-title">FEATURED GAMES</h2>
+        <p class="section-desc">Hand-picked cyber experiences tuned for high adrenaline, precision reflexes, and leaderboard supremacy.</p>
+      </div>
+
+      <div class="featured-grid">
+        <!-- Featured Card 1: Hyper Dash 2D -->
+        <div class="featured-card featured-racer" data-game="racer">
+          <div class="card-glare"></div>
+          <div class="featured-badge-ribbon">🔥 TRENDING ACTION</div>
+          <div class="featured-card-visual">
+            <div class="featured-scene scene-racer-hero">
+              <div class="road-perspective-grid">
+                <div class="road-horizon-sun"></div>
+                <div class="road-track">
+                  <div class="road-lane-divider"></div>
+                </div>
+                <div class="road-speed-car">
+                  <div class="car-cockpit-glow"></div>
+                  <div class="car-exhaust-flame"></div>
+                </div>
+              </div>
+              <div class="scene-hud-coords">RADAR: HIGHWAY 808 // TOP SPEED</div>
+            </div>
+          </div>
+          <div class="featured-card-body">
+            <div class="featured-meta">
+              <span class="featured-category">Action / Highway Speed</span>
+              <span class="featured-score-tag">⭐ 4.9 Arcade Rating</span>
+            </div>
+            <h3 class="featured-title">Hyper Dash 2D</h3>
+            <p class="featured-desc">Burn rubber down a neon highway! Dodge rival traffic, collect glowing energy cells, and push your cyber racer to top velocity.</p>
+            
+            <div class="featured-tags">
+              <span class="f-tag">⚡ 60 FPS Physics</span>
+              <span class="f-tag">🚗 Dynamic Traffic</span>
+              <span class="f-tag">📱 Mobile Steering</span>
+            </div>
+
+            <div class="featured-footer">
+              <div class="card-best-pill featured-pill">
+                <span class="pill-label">Personal Best</span>
+                <span class="pill-value" id="featured-best-racer">--</span>
+              </div>
+              <button class="btn-neon-primary btn-featured-launch" data-open-game="racer">
+                <span>▶ LAUNCH RACER</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Card 2: Snake Challenge -->
+        <div class="featured-card featured-snake" data-game="snake">
+          <div class="card-glare"></div>
+          <div class="featured-badge-ribbon">⭐ ARCADE LEGEND</div>
+          <div class="featured-card-visual">
+            <div class="featured-scene scene-snake-hero">
+              <div class="snake-matrix-grid">
+                <div class="snake-body-chain">
+                  <span class="s-dot s-head"></span>
+                  <span class="s-dot s-1"></span>
+                  <span class="s-dot s-2"></span>
+                  <span class="s-dot s-3"></span>
+                </div>
+                <div class="snake-target-orb"></div>
+              </div>
+              <div class="scene-hud-coords">MATRIX: 20×20 // REFLEX ARENA</div>
+            </div>
+          </div>
+          <div class="featured-card-body">
+            <div class="featured-meta">
+              <span class="featured-category">Arcade / Precision Grid</span>
+              <span class="featured-score-tag">⭐ 5.0 Retro Classic</span>
+            </div>
+            <h3 class="featured-title">Snake Challenge</h3>
+            <p class="featured-desc">The immortal retro arcade trial resurrected with modern cyberpunk neon glows, acceleration mechanics, and persistent high scores.</p>
+            
+            <div class="featured-tags">
+              <span class="f-tag">🐍 Adaptive Speed</span>
+              <span class="f-tag">⚡ Bonus Energy Orbs</span>
+              <span class="f-tag">🕹️ Touch & Keys</span>
+            </div>
+
+            <div class="featured-footer">
+              <div class="card-best-pill featured-pill">
+                <span class="pill-label">Personal Best</span>
+                <span class="pill-value" id="featured-best-snake">--</span>
+              </div>
+              <button class="btn-neon-primary btn-featured-launch" data-open-game="snake">
+                <span>▶ LAUNCH SNAKE</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       GAMES SECTION & 3D FLOATING CARDS
+       ========================================================================== -->
+  <section class="section" id="games">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Arcade Arena</span>
+        <h2 class="section-title">CHOOSE YOUR CHALLENGE</h2>
+        <p class="section-desc">Four hand-crafted 3D cyber experiences engineered for reflex, strategy, and memory.</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="games-filter-tabs">
+        <button class="filter-tab-btn active" data-filter="all">All Games</button>
+        <button class="filter-tab-btn" data-filter="arcade">Arcade</button>
+        <button class="filter-tab-btn" data-filter="strategy">Strategy</button>
+        <button class="filter-tab-btn" data-filter="puzzle">Puzzle</button>
+        <button class="filter-tab-btn" data-filter="action">Action</button>
+      </div>
+
+      <!-- 3D Floating Game Cards Grid -->
+      <div class="games-grid">
+        
+        <!-- Game 1: Snake Challenge -->
+        <div class="game-card" data-category="arcade" data-game="snake">
+          <div class="card-glare"></div>
+          <div class="card-art-box">
+            <span class="card-category-badge">Arcade</span>
+            <div class="card-scene scene-card-snake">
+              <div class="art-grid-backdrop"></div>
+              <div class="art-snake-trail">
+                <span class="art-seg head"></span>
+                <span class="art-seg b1"></span>
+                <span class="art-seg b2"></span>
+                <span class="art-seg b3"></span>
+              </div>
+              <div class="art-food-pulse"></div>
+              <div class="card-hud-bottom">CYBER SERPENT // 01</div>
+            </div>
+            <div class="card-emoji-wrap">
+              <span class="card-emoji">🐍</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Snake Challenge</h3>
+            <p class="card-desc">Navigate the cyber grid, consume glowing power orbs, and grow your digital serpent without crashing into walls or yourself.</p>
+            
+            <div class="card-best-pill">
+              <span class="pill-label">Personal Best</span>
+              <span class="pill-value" id="card-best-snake">--</span>
+            </div>
+
+            <button class="btn-card-play" data-open-game="snake">
+              <span class="btn-card-glow"></span>
+              <span>▶ Play Snake</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Game 2: Cyber Tic-Tac-Toe -->
+        <div class="game-card" data-category="strategy" data-game="tictactoe">
+          <div class="card-glare"></div>
+          <div class="card-art-box">
+            <span class="card-category-badge">Strategy</span>
+            <div class="card-scene scene-card-ttt">
+              <div class="art-grid-3x3">
+                <div class="ttt-cell-mark x-mark">✕</div>
+                <div class="ttt-cell-mark o-mark">◯</div>
+                <div class="ttt-cell-mark x-mark-alt">✕</div>
+              </div>
+              <div class="card-hud-bottom">MINIMAX AI // 02</div>
+            </div>
+            <div class="card-emoji-wrap">
+              <span class="card-emoji">⭕</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Cyber Tic-Tac-Toe</h3>
+            <p class="card-desc">Face off against our smart tactical AI or play locally with a friend in a neon holographic 3x3 grid battle.</p>
+            
+            <div class="card-best-pill">
+              <span class="pill-label">Win Record</span>
+              <span class="pill-value" id="card-best-ttt">--</span>
+            </div>
+
+            <button class="btn-card-play" data-open-game="tictactoe">
+              <span class="btn-card-glow"></span>
+              <span>▶ Play Tic-Tac-Toe</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Game 3: Neon Memory Match -->
+        <div class="game-card" data-category="puzzle" data-game="memory">
+          <div class="card-glare"></div>
+          <div class="card-art-box">
+            <span class="card-category-badge">Puzzle</span>
+            <div class="card-scene scene-card-memory">
+              <div class="art-cards-fan">
+                <div class="fan-card fc-1"><span>⚡</span></div>
+                <div class="fan-card fc-2"><span>🚀</span></div>
+                <div class="fan-card fc-3"><span>💎</span></div>
+              </div>
+              <div class="card-hud-bottom">SYNAPSE MATRIX // 03</div>
+            </div>
+            <div class="card-emoji-wrap">
+              <span class="card-emoji">🧠</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Neon Memory Match</h3>
+            <p class="card-desc">Test your mental buffer! Flip 3D holographic tiles and pair up matching cyberpunk symbols before time runs out.</p>
+            
+            <div class="card-best-pill">
+              <span class="pill-label">Best Record</span>
+              <span class="pill-value" id="card-best-memory">--</span>
+            </div>
+
+            <button class="btn-card-play" data-open-game="memory">
+              <span class="btn-card-glow"></span>
+              <span>▶ Play Memory</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Game 4: Hyper Dash 2D -->
+        <div class="game-card" data-category="action" data-game="racer">
+          <div class="card-glare"></div>
+          <div class="card-art-box">
+            <span class="card-category-badge">Action</span>
+            <div class="card-scene scene-card-racer">
+              <div class="art-highway-warp">
+                <div class="art-speed-line l1"></div>
+                <div class="art-speed-line l2"></div>
+                <div class="art-racer-mini"></div>
+              </div>
+              <div class="card-hud-bottom">HYPER HIGHWAY // 04</div>
+            </div>
+            <div class="card-emoji-wrap">
+              <span class="card-emoji">🏎️</span>
+            </div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Hyper Dash 2D</h3>
+            <p class="card-desc">Burn rubber down a neon highway! Dodge rival traffic, grab energy cells, and push your cyber racer to top speeds.</p>
+            
+            <div class="card-best-pill">
+              <span class="pill-label">Max Distance</span>
+              <span class="pill-value" id="card-best-racer">--</span>
+            </div>
+
+            <button class="btn-card-play" data-open-game="racer">
+              <span class="btn-card-glow"></span>
+              <span>▶ Play Racer</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       LEADERBOARD SECTION
+       ========================================================================== -->
+  <section class="section section-leaderboard" id="leaderboard">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Hall of Records</span>
+        <h2 class="section-title">ARCADE LEADERBOARD</h2>
+        <p class="section-desc">Personal high scores and rank badges saved automatically in your browser.</p>
+      </div>
+
+      <!-- Quick Metrics Summary Cards -->
+      <div class="leaderboard-summary-cards">
+        <div class="summary-card">
+          <span class="summary-icon">👑</span>
+          <div class="summary-info">
+            <div class="summary-val cyan" id="summary-top-tier">ROOKIE</div>
+            <div class="summary-lbl">Current Top Pilot Tier</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <span class="summary-icon">🎯</span>
+          <div class="summary-info">
+            <div class="summary-val purple" id="summary-games-count">4 / 4</div>
+            <div class="summary-lbl">Arcade Arenas Online</div>
+          </div>
+        </div>
+        <div class="summary-card">
+          <span class="summary-icon">💾</span>
+          <div class="summary-info">
+            <div class="summary-val green">PERSISTENT</div>
+            <div class="summary-lbl">Browser LocalStorage Sync</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="leaderboard-terminal">
+        <div class="terminal-header">
+          <div class="terminal-title">
+            <span class="dot"></span>
+            <span>PILOT STATUS TERMINAL // RECS_v2.6</span>
+          </div>
+          <button class="btn-terminal-reset" id="leaderboard-reset-btn" title="Reset all saved scores">
+            Clear Records
+          </button>
+        </div>
+
+        <div class="leaderboard-table-wrap">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th class="col-rank">Rank</th>
+                <th class="col-game">Game</th>
+                <th class="col-score">Personal Best</th>
+                <th class="col-tier">Pilot Tier</th>
+                <th class="col-action">Launch</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-tbody">
+              <!-- Dynamically populated by js/main.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ABOUT SECTION
+       ========================================================================== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Architecture</span>
+        <h2 class="section-title">BUILT FOR SPEED & FUN</h2>
+        <p class="section-desc">Crafted with pure HTML5, modern CSS3, and vanilla JavaScript for uncompromising browser performance.</p>
+      </div>
+
+      <div class="about-features-grid">
+        <div class="feature-box">
+          <span class="feature-icon">⚡</span>
+          <h3 class="feature-title">Zero Latency Play</h3>
+          <p class="feature-desc">Runs 100% on the client side. No laggy servers, no loading spinners, and instantaneous response times.</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">💾</span>
+          <h3 class="feature-title">Local Persistence</h3>
+          <p class="feature-desc">High scores, win records, and audio preferences are seamlessly saved in your browser's localStorage.</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">🔊</span>
+          <h3 class="feature-title">Web Audio Synth</h3>
+          <p class="feature-desc">Sound effects are generated dynamically via the Web Audio API. Zero external audio downloads needed!</p>
+        </div>
+
+        <div class="feature-box">
+          <span class="feature-icon">📱</span>
+          <h3 class="feature-title">Desktop & Mobile</h3>
+          <p class="feature-desc">Engineered with responsive virtual D-pads and touch controls so you can play on phones, tablets, or computers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT SECTION
+       ========================================================================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Transmission</span>
+        <h2 class="section-title">COMMUNICATIONS ARRAY</h2>
+        <p class="section-desc">Have a game suggestion or feedback for Chetan GameVerse? Dispatch a message below.</p>
+      </div>
+
+      <div class="contact-card">
+        <form id="cyber-contact-form">
+          <div class="form-group">
+            <label class="form-label" for="contact-name">Pilot Codename / Name</label>
+            <input type="text" id="contact-name" class="form-input" placeholder="e.g. CyberAce_99" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-email">Subspace Frequency / Email</label>
+            <input type="email" id="contact-email" class="form-input" placeholder="pilot@gameverse.net" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-topic">Transmission Topic</label>
+            <select id="contact-topic" class="form-select">
+              <option value="suggest">Suggest a New Mini-Game</option>
+              <option value="feedback">Gameplay Feedback</option>
+              <option value="bug">Report a Glitch</option>
+              <option value="other">General Transmission</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact-message">Message Details</label>
+            <textarea id="contact-message" class="form-textarea" placeholder="Enter your transmission here..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-neon-primary" style="width: 100%;">
+            <span>📡 DISPATCH TRANSMISSION</span>
+          </button>
+
+          <!-- Feedback Banner -->
+          <div id="contact-feedback" class="contact-feedback-banner hidden">
+            ✓ Transmission received by Mission Control! Thank you for contacting Chetan GameVerse.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a href="#home" class="logo-brand">
+          <span class="logo-icon">🕹️</span>
+          <span class="logo-text">CHETAN<span class="cyan">GAME</span><span class="purple">VERSE</span></span>
+        </a>
+
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#featured">Featured</a></li>
+          <li><a href="#games">Games</a></li>
+          <li><a href="#leaderboard">Leaderboard</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#home" class="btn-back-top">▲ Back to Top</a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Chetan GameVerse. Built with HTML5, CSS3 & Vanilla JavaScript. Hostable on GitHub Pages.</p>
+        <p class="highlight-cyan">Powered by Web Audio API & HTML5 Canvas</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       GAME MODALS / ARENAS
+       ========================================================================== -->
+
+  <!-- MODAL 1: SNAKE CHALLENGE -->
+  <div class="game-modal hidden" id="modal-snake">
+    <div class="modal-backdrop"></div>
+    <div class="game-arena-container">
+      <div class="arena-header">
+        <div class="arena-title-wrap">
+          <span class="arena-icon">🐍</span>
+          <span class="arena-title">SNAKE CHALLENGE</span>
+        </div>
+        <div class="arena-controls-top">
+          <button class="modal-close-btn" title="Close Arena" aria-label="Close Arena">&times;</button>
+        </div>
+      </div>
+
+      <div class="arena-hud">
+        <div class="hud-stat-group">
+          <div class="hud-stat">Score: <span class="hud-stat-val" id="snake-score">0</span></div>
+          <div class="hud-stat">Best: <span class="hud-stat-val gold" id="snake-high-score">0</span></div>
+        </div>
+        <div class="hud-buttons">
+          <button class="btn-hud" id="snake-pause-btn">⏸ Pause</button>
+          <button class="btn-hud" id="snake-restart-btn">↺ Restart</button>
+        </div>
+      </div>
+
+      <div class="arena-stage">
+        <canvas id="snake-canvas" class="arcade-canvas" width="400" height="400"></canvas>
+
+        <!-- Touch D-Pad for Mobile -->
+        <div class="virtual-dpad">
+          <button class="dpad-btn dpad-up" id="snake-btn-up" aria-label="Up">▲</button>
+          <button class="dpad-btn dpad-left" id="snake-btn-left" aria-label="Left">◀</button>
+          <div class="dpad-center"></div>
+          <button class="dpad-btn dpad-right" id="snake-btn-right" aria-label="Right">▶</button>
+          <button class="dpad-btn dpad-down" id="snake-btn-down" aria-label="Down">▼</button>
+        </div>
+
+        <!-- Snake Game Over Overlay -->
+        <div class="arena-overlay hidden" id="snake-overlay">
+          <h3 class="overlay-title" id="snake-overlay-title">GAME OVER</h3>
+          <div class="overlay-score-val" id="snake-overlay-score">0</div>
+          <span class="stat-badge" id="snake-overlay-badge">Best: 0</span>
+          <button class="btn-overlay-action" id="snake-overlay-restart">PLAY AGAIN</button>
+        </div>
+      </div>
+
+      <div class="arena-footer-hint">
+        Controls: <span class="key-badge">W</span><span class="key-badge">A</span><span class="key-badge">S</span><span class="key-badge">D</span> or <span class="key-badge">Arrow Keys</span> • Pause: <span class="key-badge">SPACE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: CYBER TIC-TAC-TOE -->
+  <div class="game-modal hidden" id="modal-tictactoe">
+    <div class="modal-backdrop"></div>
+    <div class="game-arena-container">
+      <div class="arena-header">
+        <div class="arena-title-wrap">
+          <span class="arena-icon">⭕</span>
+          <span class="arena-title">CYBER TIC-TAC-TOE</span>
+        </div>
+        <div class="arena-controls-top">
+          <button class="modal-close-btn" title="Close Arena" aria-label="Close Arena">&times;</button>
+        </div>
+      </div>
+
+      <div class="arena-hud">
+        <div class="hud-stat-group">
+          <div class="hud-stat">Wins: <span class="hud-stat-val" id="ttt-score-wins">0</span></div>
+          <div class="hud-stat">Losses: <span class="hud-stat-val" id="ttt-score-losses">0</span></div>
+          <div class="hud-stat">Draws: <span class="hud-stat-val" id="ttt-score-draws">0</span></div>
+        </div>
+        <div class="hud-buttons">
+          <select id="ttt-mode-select" class="ttt-select" aria-label="Game Mode">
+            <option value="ai">vs Cyber AI</option>
+            <option value="pvp">2-Player Pass & Play</option>
+          </select>
+          <button class="btn-hud" id="ttt-restart-btn">↺ Reset</button>
+        </div>
+      </div>
+
+      <div class="arena-stage ttt-stage">
+        <div class="ttt-status-indicator" id="ttt-status">Your Turn (X)</div>
+
+        <div class="ttt-grid">
+          <div class="ttt-cell" data-index="0"></div>
+          <div class="ttt-cell" data-index="1"></div>
+          <div class="ttt-cell" data-index="2"></div>
+          <div class="ttt-cell" data-index="3"></div>
+          <div class="ttt-cell" data-index="4"></div>
+          <div class="ttt-cell" data-index="5"></div>
+          <div class="ttt-cell" data-index="6"></div>
+          <div class="ttt-cell" data-index="7"></div>
+          <div class="ttt-cell" data-index="8"></div>
+        </div>
+
+        <!-- Tic Tac Toe Result Overlay -->
+        <div class="arena-overlay hidden" id="ttt-overlay">
+          <h3 class="overlay-title" id="ttt-overlay-title">VICTORY!</h3>
+          <p class="overlay-sub" id="ttt-overlay-sub">You breached the Cyber AI!</p>
+          <button class="btn-overlay-action" id="ttt-overlay-restart">PLAY NEXT ROUND</button>
+        </div>
+      </div>
+
+      <div class="arena-footer-hint">
+        Click or tap any square to place your marker. Match 3 across, down, or diagonal!
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: NEON MEMORY MATCH -->
+  <div class="game-modal hidden" id="modal-memory">
+    <div class="modal-backdrop"></div>
+    <div class="game-arena-container">
+      <div class="arena-header">
+        <div class="arena-title-wrap">
+          <span class="arena-icon">🧠</span>
+          <span class="arena-title">NEON MEMORY MATCH</span>
+        </div>
+        <div class="arena-controls-top">
+          <button class="modal-close-btn" title="Close Arena" aria-label="Close Arena">&times;</button>
+        </div>
+      </div>
+
+      <div class="arena-hud">
+        <div class="hud-stat-group">
+          <div class="hud-stat">Moves: <span class="hud-stat-val" id="memory-moves">0</span></div>
+          <div class="hud-stat">Time: <span class="hud-stat-val" id="memory-time">00:00</span></div>
+          <div class="hud-stat">Best: <span class="hud-stat-val gold" id="memory-best">--</span></div>
+        </div>
+        <div class="hud-buttons">
+          <button class="btn-hud" id="memory-restart-btn">↺ Reshuffle</button>
+        </div>
+      </div>
+
+      <div class="arena-stage">
+        <div class="memory-grid" id="memory-grid">
+          <!-- Dynamically generated 16 cards -->
+        </div>
+
+        <!-- Victory Overlay -->
+        <div class="arena-overlay hidden" id="memory-overlay">
+          <div class="overlay-stars" id="memory-overlay-stars">⭐⭐⭐</div>
+          <h3 class="overlay-title" id="memory-overlay-title">MATRIX CLEARED!</h3>
+          <p class="overlay-sub" id="memory-overlay-stats">Completed in 14 moves!</p>
+          <button class="btn-overlay-action" id="memory-overlay-restart">PLAY AGAIN</button>
+        </div>
+      </div>
+
+      <div class="arena-footer-hint">
+        Click or tap 2 cards to reveal symbols. Match all 8 pairs with the fewest moves!
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: HYPER DASH 2D RACER -->
+  <div class="game-modal hidden" id="modal-racer">
+    <div class="modal-backdrop"></div>
+    <div class="game-arena-container">
+      <div class="arena-header">
+        <div class="arena-title-wrap">
+          <span class="arena-icon">🏎️</span>
+          <span class="arena-title">HYPER DASH 2D</span>
+        </div>
+        <div class="arena-controls-top">
+          <button class="modal-close-btn" title="Close Arena" aria-label="Close Arena">&times;</button>
+        </div>
+      </div>
+
+      <div class="arena-hud">
+        <div class="hud-stat-group">
+          <div class="hud-stat">Distance: <span class="hud-stat-val" id="racer-score">0m</span></div>
+          <div class="hud-stat">Speed: <span class="hud-stat-val" id="racer-speed">0 km/h</span></div>
+          <div class="hud-stat">Best: <span class="hud-stat-val gold" id="racer-high-score">0m</span></div>
+        </div>
+        <div class="hud-buttons">
+          <button class="btn-hud" id="racer-start-btn">▶ Race</button>
+          <button class="btn-hud" id="racer-pause-btn">⏸ Pause</button>
+        </div>
+      </div>
+
+      <div class="arena-stage">
+        <canvas id="racer-canvas" class="arcade-canvas" width="360" height="540"></canvas>
+
+        <!-- Touch Controls for Mobile Steering -->
+        <div class="racer-touch-controls">
+          <button class="racer-steer-btn" id="racer-btn-left">◀ STEER LEFT</button>
+          <button class="racer-steer-btn" id="racer-btn-right">STEER RIGHT ▶</button>
+        </div>
+
+        <!-- Racer Crash Overlay -->
+        <div class="arena-overlay hidden" id="racer-overlay">
+          <h3 class="overlay-title" id="racer-overlay-title">ROAD CRASH</h3>
+          <div class="overlay-score-val" id="racer-overlay-score">0m</div>
+          <span class="stat-badge" id="racer-overlay-badge">Best: 0m</span>
+          <button class="btn-overlay-action" id="racer-overlay-restart">RACE AGAIN</button>
+        </div>
+      </div>
+
+      <div class="arena-footer-hint">
+        Controls: <span class="key-badge">◀</span> <span class="key-badge">▶</span> or <span class="key-badge">A</span> <span class="key-badge">D</span> to Steer • Grab <span class="key-badge">⚡</span> Energy Orbs!
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SCRIPTS (Loaded in proper dependency order)
+       ========================================================================== -->
+  <script src="js/audio.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/snake.js"></script>
+  <script src="js/tictactoe.js"></script>
+  <script src="js/memory.js"></script>
+  <script src="js/racer.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
